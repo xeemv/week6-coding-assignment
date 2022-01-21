@@ -1,5 +1,5 @@
-const suits = ["Heart", "Spade", "Diamond", "Club"];
-const values = ["A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2"];
+const SUITS = ["Heart", "Spade", "Diamond", "Club"];
+const VALUES = ["A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2"];
 const cardValue = {
     'A': 14,
     'K': 13,
@@ -31,23 +31,29 @@ class Card {
 // create a class for deck
 class Deck {
     
-    constructor (newGame = newDeck()){
-        this.newGame = newGame;
+    constructor (cards = newDeck()){
+        this.cards = cards;
     }
 
     // total # of card
     get totalCards (){
-        return this.newGame.length; // will return the length of the deck w/o repeating
+        return this.cards.length; // will return the length of the deck w/o repeating
     }
 
 
     // shuffle the deck
     shuffle(){
-        this.Card = shuffle(this.Card);        // shuffle the cards from the card class
-        for (let i = this.totalCards; i > 0; i++){  // for loop using totalCards
-            const newIndex = Math.floor(Math.random() * (this.newGame.length));
+        this.Card = shuffle(this.Card);        
+        // shuffle the cards from the card class
+        for (let i = this.totalCards; i > 0; i--){  
+            // for loop using totalCards
+            // our count will start at the end of our list of cards to the beginning of the list
+            // i > 0 ==> this is because we will not need to flip that last card in the deck
+            // this will also flip our card w/ one that 
+            const newIndex = Math.floor(Math.random() * (this.cards.length));
+            // a new index for where I want to put this card
 
-        }
+        // }
 
             /*
             - utilize the for loop to iterate through the deck
@@ -64,11 +70,11 @@ class Deck {
 
 
 function newDeck(){
-    // using a flat map will return mutiple values w/o changing the original array
+    // using a flat map will return mutiple values w/o changing the original array instead of 4 separate arrays (4 suits)
     // will need flatmap followed by map
-    return suits.flatMap(suits => {
-        return values.map(values =>{
-            return new Card(suits, values);
+    return SUITS.flatMap(suits => {
+        return VALUES.map(values =>{
+            return new Card(SUITS, VALUES);
         });
     });
 }
@@ -105,3 +111,4 @@ class Players {
 
 
 }
+
