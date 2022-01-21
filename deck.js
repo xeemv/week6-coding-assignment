@@ -1,6 +1,6 @@
 const SUITS = ["Heart", "Spade", "Diamond", "Club"];
 const VALUES = ["A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2"];
-const cardValue = {
+const cardValueMap = {
     'A': 14,
     'K': 13,
     'Q': 12,
@@ -43,32 +43,35 @@ class Deck {
 
     // shuffle the deck
     shuffle(){
-        this.Card = shuffle(this.Card);        
+        // this.Card = shuffle(this.Card);        
         // shuffle the cards from the card class
         for (let i = this.totalCards; i > 0; i--){  
-            // for loop using totalCards
-            // our count will start at the end of our list of cards to the beginning of the list
-            // i > 0 ==> this is because we will not need to flip that last card in the deck
-            // this will also flip our card w/ one that 
-            // looping through the current card and swapping it w/ a new card
-            const newIndex = Math.floor(Math.random() * (this.cards));
-            // a new index for where I want to put this card
-            // the index should occur earlier in the deck of card then the player's current spot
-            const oldValue = this.cards[newIndex]
-            // flip the value at the new index w/ the current index
-            // swap old card w/ new card
-            this.cards[newIndex] = this.cards[i]
-            this.cards[i] = oldValue
-
-        }
-
-            /*
+            /* 
+            - for loop using totalCards
             - utilize the for loop to iterate through the deck
             - set i to equal the totalCards in the newGame
+            - i > 0 ==> this is because we will not need to flip that last card in the deck
             - need to randomize the cards
-                - use math.floor ==> The Math.floor() method rounds a number DOWNWARDS to the nearest integer, and returns the result - per https://www.w3schools.com/jsref/jsref_floor.asp
-                - use Math.random ==> The Math.random() method returns a random number from 0 (inclusive) up to but not including 1 (exclusive). - per https://www.w3schools.com/jsref/jsref_random.asp
+            - our count will start at the end of our list of cards to the beginning of the list
+            - this will also flip our card w/ one that 
+            - looping through the current card and swapping it w/ a new card
             */
+            const newIndex = Math.floor(Math.random() * (this.numberOfCards));
+            /*
+            - a new index for where I want to put this card
+            - the index should occur earlier in the deck of card then the player's current spot
+            - use math.floor ==> The Math.floor() method rounds a number DOWNWARDS to the nearest integer, and returns the result - per https://www.w3schools.com/jsref/jsref_floor.asp
+            - use Math.random ==> The Math.random() method returns a random number from 0 (inclusive) up to but not including 1 (exclusive). - per https://www.w3schools.com/jsref/jsref_random.asp
+            */
+            const oldValue = this.cards[newIndex]
+            /*
+            - flip the value at the new index w/ the current index
+            - swap old card w/ new card
+            */
+            this.cards[newIndex] = this.cards[i]
+            this.cards[i] = oldValue
+        }
+
     }
 
 
@@ -91,44 +94,75 @@ function newDeck() {
 
 // }
 
-// set up a new game
+// global variable to be accessible everywhere
+let playerDeck, computerDeck
+
+
+
+
+// set up a new game - global variable
 startGame () 
-function startGame(player1, player2) {
+function startGame() {
     // create a new deck for the game
-    const deck = new Deck()  
+    const deck = new Deck();
     // make sure to use shuffle w/ the new deck  
-    deck.shuffle()
+    deck.shuffle();
 
     // divide the deck in half 
-    const deckMidpoint = Math.ceil(deck.numberOfCards / 2)
+    const deckMidpoint = Math.ceil(deck.numberOfCards / 2);
     /* 
     - By using ==> The Math.ceil() method rounds a number UPWARDS to the nearest integer, and returns the result - per https://www.w3schools.com/jsref/jsref_ceil.asp
     - this way we always get a whole integer incase we ever had an uneven deck of cards
     - a safety net basically
     */
-
-    
     // create the individual player's deck
+    playerDeck = new Deck(deck.cards.slice(0, deckMidpoint));     
+    /* 
+    - will want the player to start w/ 26 cards
+    - start a new deck for the player
+    - slice the deck using deckMidpoint
+        - basically starting at card 0 - midpoint
+    */
+    computerDeck = new Deck(deck.cards.slice(deckMidpoint, deck.numberOfCards));     
+    /* 
+    - will want the computer to start w/ 26 cards
+    - start a new deck for the player
+    - slice the deck using deckMidpoint
+        - basically starting at the midpoint till the last card
+    */
+    // console.log(playerDeck)
+    // console.log(computerDeck)
+}
+
+// determine which hand won this round
+function wonTheRound (player1, player2){
+    // a brand new slate prior to the start of each round
+    if (cardValueMap[player1.VALUES] > cardValueMap[player2.VALUES]);
 }
 
 
 
 
-// // create a class to store the player information
-// class Players {
-//     constructor(player){
-//         this.player = player;
-//         this.hand = hand;
-//         this.score = score;
+// create a class to store the player information 
+class Player {
+    constructor(player){
+        this.player = player;
+        this.hand = [];
+        this.score = 0;
 
-//     }
-//     // player name
-//     // player card (suite/value) of that turn - hand
-//     // player score after all cards are played
+    }
+    // player name
+    // player card (suit/value) of that turn - hand
+    // player score after all cards are played
+    addNewDeck(deck) {
+        this.playerDeck = deck;
+      }
 
+}
 
-// }
+// const deck = new Deck()
+// // deck.shuffle()
+// console.log(deck.cards)
+    console.log(playerDeck)
+    console.log(computerDeck)
 
-const deck = new Deck()
-// deck.shuffle()
-console.log(deck.cards)
