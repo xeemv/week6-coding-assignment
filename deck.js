@@ -31,7 +31,7 @@ class Card {
 // create a class for deck
 class Deck {
     
-    constructor (cards = newDeck()){
+    constructor (cards = newDeck()) {
         this.cards = cards;
     }
 
@@ -50,10 +50,17 @@ class Deck {
             // our count will start at the end of our list of cards to the beginning of the list
             // i > 0 ==> this is because we will not need to flip that last card in the deck
             // this will also flip our card w/ one that 
-            const newIndex = Math.floor(Math.random() * (this.cards.length));
+            // looping through the current card and swapping it w/ a new card
+            const newIndex = Math.floor(Math.random() * (this.cards));
             // a new index for where I want to put this card
+            // the index should occur earlier in the deck of card then the player's current spot
+            const oldValue = this.cards[newIndex]
+            // flip the value at the new index w/ the current index
+            // swap old card w/ new card
+            this.cards[newIndex] = this.cards[i]
+            this.cards[i] = oldValue
 
-        // }
+        }
 
             /*
             - utilize the for loop to iterate through the deck
@@ -65,50 +72,53 @@ class Deck {
     }
 
 
-    // game over
+    // // game over
 }
 
 
-function newDeck(){
+function newDeck() {
     // using a flat map will return mutiple values w/o changing the original array instead of 4 separate arrays (4 suits)
     // will need flatmap followed by map
     return SUITS.flatMap(suits => {
         return VALUES.map(values =>{
-            return new Card(SUITS, VALUES);
+            return new Card(suits, values);
         });
     });
 }
 
 
-const shuffle (){
+// const shuffle (){
 
-}
+// }
 
 // set up a new game
-function startGame(player1, player2) {
-    // create a new deck for the game
-    const deck = new Deck();  
-    // shuffle the deck  
-    const shuffle =
+// function startGame(player1, player2) {
+//     // create a new deck for the game
+//     const deck = new Deck();  
+//     // shuffle the deck  
+//     const shuffle =
 
-    //
+//     //
 
-}
-
-
-
-// create a class to store the player information
-class Players {
-    constructor(player){
-        this.player = player;
-        this.hand = hand;
-        this.score = score;
-
-    }
-    // player name
-    // player card (suite/value) of that turn - hand
-    // player score after all cards are played
+// }
 
 
-}
 
+// // create a class to store the player information
+// class Players {
+//     constructor(player){
+//         this.player = player;
+//         this.hand = hand;
+//         this.score = score;
+
+//     }
+//     // player name
+//     // player card (suite/value) of that turn - hand
+//     // player score after all cards are played
+
+
+// }
+
+const deck = new Deck()
+// deck.shuffle()
+console.log(deck.cards)
