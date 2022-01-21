@@ -92,15 +92,25 @@ function newDeck() {
 // }
 
 // set up a new game
-// function startGame(player1, player2) {
-//     // create a new deck for the game
-//     const deck = new Deck();  
-//     // shuffle the deck  
-//     const shuffle =
+startGame () 
+function startGame(player1, player2) {
+    // create a new deck for the game
+    const deck = new Deck()  
+    // make sure to use shuffle w/ the new deck  
+    deck.shuffle()
 
-//     //
+    // divide the deck in half 
+    const deckMidpoint = Math.ceil(deck.numberOfCards / 2)
+    /* 
+    - By using ==> The Math.ceil() method rounds a number UPWARDS to the nearest integer, and returns the result - per https://www.w3schools.com/jsref/jsref_ceil.asp
+    - this way we always get a whole integer incase we ever had an uneven deck of cards
+    - a safety net basically
+    */
 
-// }
+    
+    // create the individual player's deck
+}
+
 
 
 
