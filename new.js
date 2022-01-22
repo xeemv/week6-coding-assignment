@@ -1,3 +1,4 @@
+
 const SUITS = ["Heart", "Spade", "Diamond", "Club"];
 const VALUES = ["A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2"];
 const cardValueMap = {
@@ -16,7 +17,6 @@ const cardValueMap = {
     '2': 2
 }
 
-
 // create a class to store the player information 
 class Player {
     constructor(playerName){
@@ -29,11 +29,14 @@ class Player {
     // player card (suit/value) of that turn - playerHand
     // player score after all cards are played
 
-    addNewDeck(deck){
-        this.newHand = deck;
+    dealt(newSet){
+        for (let i = 0; i < 26; i++){
+            this.newHand.push(newSet[i]);
+        } 
     }
 }
 
+let player1, player2
 
 
 // create a class for card which will identify what the suit and card value is
@@ -59,7 +62,6 @@ class Deck {
         // will return the length of the deck w/o repeating
     }
 
-
     // shuffle the deck
     shuffle(){
         // this.Card = shuffle(this.Card);        
@@ -75,32 +77,8 @@ class Deck {
             this.cards[i] = oldValue;
         }
     }
-    /* 
-    ****for (let i = this.totalCards; i > 0; i--){   ===>
-    - for loop using totalCards
-    - utilize the for loop to iterate through the deck
-    - set i to equal the totalCards in the newGame
-    - i > 0 ==> this is because we will not need to flip that last card in the deck
-    - need to randomize the cards
-    - our count will start at the end of our list of cards to the beginning of the list
-    - this will also flip our card w/ one that 
-    - looping through the current card and swapping it w/ a new card
-    */
-
-    /* 
-    ****const newIndex = Math.floor(Math.random() * (this.numberOfCards)); ==>
-    - a new index for where I want to put this card
-    - the index should occur earlier in the deck of card then the player's current spot
-    - use math.floor ==> The Math.floor() method rounds a number DOWNWARDS to the nearest integer, and returns the result - per https://www.w3schools.com/jsref/jsref_floor.asp
-    - use Math.random ==> The Math.random() method returns a random number from 0 (inclusive) up to but not including 1 (exclusive). - per https://www.w3schools.com/jsref/jsref_random.asp
-    */
-
 }
 
-
-
-// // global variable to be accessible everywhere
-// let player1Deck, player2Deck
 
 function newDeck() {
     // using a flat map will return mutiple values w/o changing the original array instead of 4 separate arrays (4 suits)
@@ -110,6 +88,23 @@ function newDeck() {
             return new Card(suits, values);
         });
     });
+}
+
+//alert('Welcome to Card War. Let the games begin!!');
+
+// to start a game
+function startGame(player1, player2) {
+    // create a new deck for the game
+    console.log("new game") //test to see if this works, and determine is shuffle is working
+    const deck = new Deck();
+    console.log(deck);
+    deck.shuffle()
+
+    player1.dealt(deck.cards.slice(0, 26));
+    console.log(player1.dealt(deck.cards.slice(0, 26)));
+    player2.dealt(deck.cards.slice(26));
+    console.log(player1.dealt.length); //check length of each new hand = 26
+    console.log(player2.dealt.length); //check length of each new hand = 26
 }
 
 
@@ -134,71 +129,7 @@ function wonTheRound (player1, player2){
     }
 } 
 
+let Xee = new Player('Xee');
 let Messa = new Player ('Messa');
-let Xee = new Player ('Xee');
-
-
-//startGame(Messa, Xee);
-//wonTheRound(Messa, Xee);
-
-
-
-
-// console.log(player1Deck)
-// console.log(player2Deck)
-// const testDeck = new Deck ();
-
-// console.log(testDeck);
-// console.log(testDeck.shuffle());
-// console.log(testDeck);
-
-class Game {
-    constructor () {
-        this.player = [];
-    }
-    
-        // to start a game
-        startGame(player1, player2) {
-            // create a new deck for the game
-            const deck = new Deck();
-            console.log(deck);
-
-            // // make sure to use shuffle w/ the new deck  
-            deck.shuffle();
-
-
-            // divide the deck in half 
-            //const halfDeck = (deck.totalCards / 2);
-            /* 
-            - this way we split the deck of cards
-            - a safety net basically
-            */
-            //console.log(halfDeck);
-
-            this.player.push(new Player(player1));
-            this.player.push(new Player(player2));
-
-            // create the individual player's deck
-            this.player[0].playerHand = addNewDeck(deck.cards.slice(0, 26))
-            
-            //console.log(player1.addNewDeck(deck.cards.slice(0, halfDeck)));    
-            
-        
-            /* 
-            - will want the player to start w/ 26 cards
-            - start a new deck for the player
-            - slice the deck using deckMidpoint
-                - basically starting at card 0 - midpoint
-            */
-            player2.addNewDeck(deck.cards.slice(halfDeck, deck.totalCards));
-            //console.log(player2.addNewDeck(deck.cards.slice(halfDeck, deck.totalCards)));      
-            /* 
-            - will want the computer to start w/ 26 cards
-            - start a new deck for the player
-            - slice the deck using deckMidpoint
-                - basically starting at the midpoint till the last card
-            */
-            
-        }
-}
-console.log(this.player.playerHand);
+startGame(Xee, Messa);
+// console.log(player1.newHand.length);
