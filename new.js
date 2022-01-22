@@ -118,8 +118,8 @@ let player2 = new Player("Messa");
 // to start a game
 // beginGame(player1, player2)
 function beginGame(player1, player2){
-    // alert('Welcome to Card War. Let the games begin!!');
-    // alert('Shuffle your deck');
+    alert('Welcome to Card War. Let the games begin!!');
+    alert('Shuffle your deck');
     // console.log('starting new function');
     const deck = new Deck ();
     // console.log('begin new game');
@@ -209,7 +209,7 @@ function gameWinner(player1,player2){
     
     
     
-    // alert("Thank you for playing Card War. Have a wonderful day!")
+    alert("Thank you for playing Card War. Have a wonderful day!")
 }
 
 
