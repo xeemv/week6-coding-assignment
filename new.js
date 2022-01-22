@@ -29,14 +29,17 @@ class Player {
     // player card (suit/value) of that turn - playerHand
     // player score after all cards are played
 
-    dealt(newSet){
-        for (let i = 0; i < 26; i++){
-            this.newHand.push(newSet[i]);
-        } 
-    }
-}
+    // dealt(newSet){
+    //     for (let i = 0; i < 26; i++){
+    //         this.newHand.push(newSet[i]);
+    //     } 
+    // }
 
-let player1, player2
+    // addNewDeck(deck) {
+    //     this.playerDeck = deck;
+    // }
+
+}
 
 
 // create a class for card which will identify what the suit and card value is
@@ -62,7 +65,7 @@ class Deck {
         // will return the length of the deck w/o repeating
     }
 
-    // shuffle the deck
+    // // shuffle the deck
     shuffle(){
         // this.Card = shuffle(this.Card);        
         // shuffle the cards from the card class
@@ -90,46 +93,48 @@ function newDeck() {
     });
 }
 
-//alert('Welcome to Card War. Let the games begin!!');
+
+/* =====================================================
+** create an automated version of the classic card game WAR.**
+-	Deal 26 Cards to two Players from a Deck. 
+-	Iterate through the turns where each Player plays a Card
+-	The Player who played the higher card is awarded a point
+    o	Ties result in zero points for either Player
+-	After all cards have been played, display the score.
+
+- Write a Unit Test using Mocha and Chai for at least one of the functions you write.
+
+    ======================================================
+*/
+
+//let player1, player2
+
+// alert('Welcome to Card War. Let the games begin!!');
+// alert('Shuffle your deck');
 
 // to start a game
-function startGame(player1, player2) {
-    // create a new deck for the game
-    console.log("new game") //test to see if this works, and determine is shuffle is working
-    const deck = new Deck();
-    console.log(deck);
-    deck.shuffle()
+beginGame()
+function beginGame(){
+    console.log('starting new function');
+    const deck = new Deck ();
+    console.log('begin new game');
+    deck.shuffle();
+    console.log(deck) // check to see if it's shuffled
 
-    player1.dealt(deck.cards.slice(0, 26));
-    console.log(player1.dealt(deck.cards.slice(0, 26)));
-    player2.dealt(deck.cards.slice(26));
-    console.log(player1.dealt.length); //check length of each new hand = 26
-    console.log(player2.dealt.length); //check length of each new hand = 26
+
+    player1Deck = new Deck(deck.cards.slice(0, 26));    // start from 0 - 26
+    console.log(player1Deck); // check to see our player1's deck
+    player2Deck = new Deck(deck.cards.slice(26, deck.totalCards));  // deck start at 26 - end of the deck
+    console.log(player2Deck) // check to see our player2's deck
 }
 
 
+// let Messa = new Player("Messa");
+// let Xee = new Player("Xee");
 
 
-// determine which playerHand won this round
-function wonTheRound (player1, player2){
-    for (let i = 0; i < player1.playerHand.length; i++) {
-        if (cardValueMap[player1.playerHand[i].values] > cardValueMap[player2.playerHand[i].values]){
-            player1.score += 1;
-            console.log(`${player1.playerName.playerHand[i].values[i]} of ${player1.playerName.playerHand[i].suits[i]} won the round and gets 1 point` + `current score is: ${player1.score}`);
-            console.log(`current score: ${playerName.player1.score} vs current score: ${playerName.player2.score}`);
-        } else if 
-            (cardValueMap[player1.playerHand[i].values] < cardValueMap[player2.playerHand[i].values]){
-                player2.score += 1;
-                console.log(`${player2.playerName.playerHand[i].values[i]} of ${player2.playerName.playerHand[i].suits[i]} won the round and gets 1 point` + `current score is: ${player1.score}`);
-                console.log(`current score: ${playerName.player1.score} vs current score: ${playerName.player2.score}`);
-        } else {
-            console.log(`${player1.playerName} and ${player2.playerName} tie this round`);
-            console.log(`current score: ${playerName.player1.score} vs current score: ${playerName.player2.score}`);
-        }
-    }
-} 
+// console.log(deck.shuffle);
 
-let Xee = new Player('Xee');
-let Messa = new Player ('Messa');
-startGame(Xee, Messa);
-// console.log(player1.newHand.length);
+
+console.log()
+
