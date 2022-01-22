@@ -208,7 +208,6 @@ function gameWinner(player1,player2){
     alert("Thank you for playing Card War. Have a wonderful day!")
 }
 
-alert("The winner is");
 
 
 
